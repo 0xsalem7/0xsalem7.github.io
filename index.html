@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>قرقستان | بودكاست ألعاب سعودي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="بودكاست قرقستان مع فيصل برزدنت - بودكاست شبابي سعودي عن الألعاب وما يدور حولها." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="top-ribbon">
+    <div class="top-ribbon__pattern"></div>
+    <span class="top-ribbon__label">بودكاست قرقستان • من قلب مجتمع اللاعبين السعوديين</span>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="#hero" class="brand__title">
+          <span class="brand__title-main">قرقستان</span>
+          <span class="brand__title-sub">بودكاست ألعاب سعودي</span>
+        </a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة">
+        <span></span><span></span>
+      </button>
+
+      <nav class="site-nav" id="siteNav">
+        <a href="#episodes">الحلقات</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="hero-kicker">بودكاست شبابي سعودي عن الألعاب وما يدور حولها</p>
+          <h1 class="hero-title">
+            قرقستان
+            <span class="hero-title__badge">الموسم الأول</span>
+          </h1>
+          <p class="hero-desc">
+           برنامج حواري شبابي عن الألعاب
+            يقدمه <strong>فيصل برزدنت</strong> 
+         
+          </p>
+          <div class="hero-actions">
+            <a href="#episodes" class="btn btn-primary">اسمع الحلقات</a>
+          </div>
+          <div class="hero-meta">
+            <span>إنتاج: قرقستان</span>
+            <span>
+              بودكاست سعودي بالكامل
+            </span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <p class="hero-card__label">أحدث حلقة</p>
+          <h2 class="hero-card__title" id="heroEpisodeTitle">
+            يتم تحميل عنوان آخر حلقة...
+          </h2>
+          <p class="hero-card__meta" id="heroEpisodeMeta">
+            سيتم جلب تاريخ ووصف الحلقة تلقائياً.
+          </p>
+          <div class="hero-card__player">
+            <iframe
+              id="heroEpisodePlayer"
+              src=""
+              title="أحدث حلقة من قرقستان"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener"
+            class="hero-card__link"
+            id="heroEpisodeLink"
+          >
+            سيتم ربط الحلقة في يوتيوب تلقائياً
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="episodes">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">حلقات قرقستان</h2>
+          <p class="section-subtitle">
+            يتم جلب الحلقات تلقائياً من قناة يوتيوب الخاصة بقرقستان (العناوين التي تحتوي كلمة "قرقستان").
+          </p>
+        </div>
+
+        <div class="episode-filters" aria-label="فلاتر الحلقات">
+          <button class="filter-btn is-active" data-filter="all">الكل</button>
+          <button class="filter-btn" data-filter="games">الألعاب</button>
+          <button class="filter-btn" data-filter="roblox">روبلوكس</button>
+          <button class="filter-btn" data-filter="anime">أنمي / بوروتو</button>
+        </div>
+
+        <div class="episodes-grid" id="episodesGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-brand">
+        قرقستان ©
+        <span class="footer-year" id="footerYear"></span>
+      </p>
+      <p class="footer-note">
+        موقع رسمي لبودكاست قرقستان • جميع الحقوق محفوظة.
+      </p>
+      <div class="footer-social">
+        <a href="https://kick.com/faisallaw" target="_blank" rel="noopener">كيك</a>
+        <a href="https://twitch.tv/presidentfaisal" target="_blank" rel="noopener">تويتش</a>
+        <a href="https://tip.dokan.sa/faisalpresident" target="_blank" rel="noopener">الدعم المادي</a>
+        <a href="https://www.instagram.com/faisallaw0/" target="_blank" rel="noopener">انستقرام</a>
+        <a href="https://tiktok.com/@prfaisal0" target="_blank" rel="noopener">تيك توك</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
