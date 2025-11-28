@@ -93,9 +93,9 @@ async function fetchQarqastanEpisodes() {
     all = all.concat(videos);
   }
 
-  all = all.filter(
-    (ep) => ep.title && ep.title.includes(QARQASTAN_QUERY)
-  );
+all = all.filter(
+  (ep) => ep.title && ep.title.includes("قرقستان")
+);
 
   all.sort(
     (a, b) =>
@@ -233,3 +233,4 @@ async function initQarqastan() {
 }
 
 initQarqastan();
+
