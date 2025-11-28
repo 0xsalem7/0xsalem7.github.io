@@ -6,6 +6,7 @@ const CHANNEL_IDS = [
 ];
 
 const MAX_RESULTS = 600;
+const QARQASTAN_QUERY = "قرقستان";
 
 const navToggle = document.getElementById("navToggle");
 const siteNav = document.getElementById("siteNav");
@@ -20,8 +21,6 @@ const footerYearEl = document.getElementById("footerYear");
 if (footerYearEl) {
   footerYearEl.textContent = new Date().getFullYear().toString();
 }
-
-const QARQASTAN_QUERY = "قرقستان";
 
 const heroTitleEl = document.getElementById("heroEpisodeTitle");
 const heroMetaEl = document.getElementById("heroEpisodeMeta");
@@ -93,9 +92,11 @@ async function fetchQarqastanEpisodes() {
     all = all.concat(videos);
   }
 
-all = all.filter(
-  (ep) => ep.title && ep.title.includes("قرقستان")
-);
+  all = all.filter((ep) => {
+    if (!ep.title) return false;
+    const t = ep.title.replace(/\s/g, "");
+    return t.includes(QARQASTAN_QUERY);
+  });
 
   all.sort(
     (a, b) =>
@@ -233,4 +234,3 @@ async function initQarqastan() {
 }
 
 initQarqastan();
-
