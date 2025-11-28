@@ -5,6 +5,8 @@ const CHANNEL_IDS = [
   "UCJUg0O8CGreZvwBmN6T3uTg"
 ];
 
+const MAX_RESULTS = 600;
+
 const navToggle = document.getElementById("navToggle");
 const siteNav = document.getElementById("siteNav");
 
@@ -44,23 +46,23 @@ function truncate(text, maxLength) {
   return text.slice(0, maxLength) + "…";
 }
 
-async function fetchQarqastanEpisodes() {
-  let all = [];
-
-  for (const channelId of CHANNEL_IDS) {
+async function fetchChannelVideos(channelId) {
+  let results = [];
+  let nextPage = "";
+  while (results.length < MAX_RESULTS) {
     const url =
       "https://www.googleapis.com/youtube/v3/search" +
       `?part=snippet&channelId=${channelId}` +
-      `&maxResults=15` +
+      `&maxResults=50` +
       `&order=date` +
       `&type=video` +
-      `&q=${encodeURIComponent(QARQASTAN_QUERY)}` +
+      (nextPage ? `&pageToken=${nextPage}` : "") +
       `&key=${YT_API_KEY}`;
 
     const res = await fetch(url);
     if (!res.ok) {
       console.error("YouTube API error", await res.text());
-      continue;
+      break;
     }
 
     const data = await res.json();
@@ -75,8 +77,25 @@ async function fetchQarqastanEpisodes() {
         publishedAt: item.snippet.publishedAt || ""
       }));
 
-    all = all.concat(episodes);
+    results = results.concat(episodes);
+
+    if (!data.nextPageToken) break;
+    nextPage = data.nextPageToken;
   }
+  return results;
+}
+
+async function fetchQarqastanEpisodes() {
+  let all = [];
+
+  for (const channelId of CHANNEL_IDS) {
+    const videos = await fetchChannelVideos(channelId);
+    all = all.concat(videos);
+  }
+
+  all = all.filter(
+    (ep) => ep.title && ep.title.includes(QARQASTAN_QUERY)
+  );
 
   all.sort(
     (a, b) =>
@@ -193,7 +212,7 @@ function setupFilters() {
 }
 
 async function initQarqastan() {
-  if (!YT_API_KEY || YT_API_KEY === "YOUR_API_KEY_HERE" || !CHANNEL_IDS.length) {
+  if (!YT_API_KEY || !CHANNEL_IDS.length) {
     console.warn("YouTube API key أو Channel IDs غير مضبوطة.");
     return;
   }
