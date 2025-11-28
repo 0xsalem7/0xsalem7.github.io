@@ -6,7 +6,6 @@ const CHANNEL_IDS = [
 ];
 
 const MAX_RESULTS = 600;
-const QARQASTAN_QUERY = "قرقستان";
 
 const navToggle = document.getElementById("navToggle");
 const siteNav = document.getElementById("siteNav");
@@ -84,6 +83,14 @@ async function fetchChannelVideos(channelId) {
   return results;
 }
 
+function isQarqastanTitle(title) {
+  if (!title) return false;
+  const t = title.replace(/\s/g, "");
+  if (t.startsWith("بودكاست:")) return true;
+  if (t.includes("قرقستان")) return true;
+  return false;
+}
+
 async function fetchQarqastanEpisodes() {
   let all = [];
 
@@ -92,11 +99,7 @@ async function fetchQarqastanEpisodes() {
     all = all.concat(videos);
   }
 
-  all = all.filter((ep) => {
-    if (!ep.title) return false;
-    const t = ep.title.replace(/\s/g, "");
-    return t.includes(QARQASTAN_QUERY);
-  });
+  all = all.filter((ep) => isQarqastanTitle(ep.title));
 
   all.sort(
     (a, b) =>
