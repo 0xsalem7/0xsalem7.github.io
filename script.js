@@ -1,4 +1,4 @@
-const YT_API_KEY = "AIzaSyB97JCri-dlKx3ly1i3QO_calCWFC9t-2s";
+const YT_API_KEY = "YOUR_API_KEY_HERE";
 
 const CHANNEL_IDS = [
   "UCwF9kkX-rzlFEJj9mieVOEA",
@@ -18,8 +18,6 @@ const footerYearEl = document.getElementById("footerYear");
 if (footerYearEl) {
   footerYearEl.textContent = new Date().getFullYear().toString();
 }
-
-const QARQASTAN_QUERY = "قرقستان";
 
 const heroTitleEl = document.getElementById("heroEpisodeTitle");
 const heroMetaEl = document.getElementById("heroEpisodeMeta");
@@ -51,10 +49,9 @@ async function fetchQarqastanEpisodes() {
     const url =
       "https://www.googleapis.com/youtube/v3/search" +
       `?part=snippet&channelId=${channelId}` +
-      `&maxResults=15` +
+      `&maxResults=20` +
       `&order=date` +
       `&type=video` +
-      `&q=${encodeURIComponent(QARQASTAN_QUERY)}` +
       `&key=${YT_API_KEY}`;
 
     const res = await fetch(url);
@@ -77,6 +74,8 @@ async function fetchQarqastanEpisodes() {
 
     all = all.concat(episodes);
   }
+
+  all = all.filter((ep) => ep.title.includes("قرقستان"));
 
   all.sort(
     (a, b) =>
@@ -193,7 +192,7 @@ function setupFilters() {
 }
 
 async function initQarqastan() {
-  if (!YT_API_KEY || YT_API_KEY === "YOUR_API_KEY_HERE" || !CHANNEL_IDS.length) {
+  if (!YT_API_KEY || YT_API_KEY === "AIzaSyB97JCri-dlKx3ly1i3QO_calCWFC9t-2s" || !CHANNEL_IDS.length) {
     console.warn("YouTube API key أو Channel IDs غير مضبوطة.");
     return;
   }
