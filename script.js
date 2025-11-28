@@ -167,7 +167,7 @@ function setupFilters() {
 }
 
 async function initQarqastan() {
-  if (!YT_API_KEY || YT_API_KEY === "YOUR_API_KEY_HERE" || !CHANNEL_IDS.length) {
+  if (!YT_API_KEY || !CHANNEL_IDS.length) {
     console.warn("YouTube API key أو Channel IDs غير مضبوطة.");
     return;
   }
