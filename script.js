@@ -5,7 +5,7 @@ const CHANNEL_IDS = [
   "UCJUg0O8CGreZvwBmN6T3uTg"
 ];
 
-const MAX_RESULTS = 200;
+const MAX_RESULTS = 600;
 
 async function fetchChannelVideos(channelId) {
   let results = [];
@@ -118,7 +118,7 @@ function renderEpisodes(episodes) {
     article.className = "episode-card";
 
     const tags = [];
-    const t = ep.title;
+    const t = ep.title || "";
     if (t.includes("روبلوكس")) tags.push("روبلوكس");
     if (t.includes("سوني") || t.includes("سايلنت")) tags.push("سوني");
     if (t.includes("بوروتو") || t.includes("أنمي")) tags.push("أنمي");
@@ -132,7 +132,7 @@ function renderEpisodes(episodes) {
       <p class="episode-card__meta">${formatArabicDate(ep.publishedAt)}</p>
       <p class="episode-card__desc">${truncate(ep.description, 160)}</p>
       <div class="episode-card__tags">
-        ${tags.map((t) => `<span>#${t}</span>`).join("")}
+        ${tags.map((x) => `<span>#${x}</span>`).join("")}
       </div>
       <div class="episode-card__actions">
         <a href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" class="btn btn-sm btn-primary">
@@ -167,11 +167,19 @@ function setupFilters() {
 }
 
 async function initQarqastan() {
-  const episodes = await fetchQarqastanEpisodes();
-  if (!episodes.length) return;
-  updateHero(episodes[0]);
-  renderEpisodes(episodes);
-  setupFilters();
+  if (!YT_API_KEY || YT_API_KEY === "YOUR_API_KEY_HERE" || !CHANNEL_IDS.length) {
+    console.warn("YouTube API key أو Channel IDs غير مضبوطة.");
+    return;
+  }
+  try {
+    const episodes = await fetchQarqastanEpisodes();
+    if (!episodes.length) return;
+    updateHero(episodes[0]);
+    renderEpisodes(episodes);
+    setupFilters();
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 initQarqastan();
