@@ -5,7 +5,7 @@ const CHANNEL_IDS = [
   "UCJUg0O8CGreZvwBmN6T3uTg"
 ];
 
-const MAX_RESULTS = 600;
+const MAX_RESULTS = 100;
 
 const navToggle = document.getElementById("navToggle");
 const siteNav = document.getElementById("siteNav");
@@ -237,3 +237,4 @@ async function initQarqastan() {
 }
 
 initQarqastan();
+
